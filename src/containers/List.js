@@ -65,7 +65,7 @@ export const List = () => {
                         </div>
                     :
                         tasks.map(task => (
-                            <Task task={task} key={task.id}/>
+                            <Task task={task} key={task.task_id}/>
                         ))
                 }
             </div>

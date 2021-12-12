@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from "./Modal"
 import { Indicator } from "./Indicator"
 import PropTypes from "prop-types";
-const API = 'http://run.mocky.io/v3/bcf27a76-e7d2-435d-9e98-703d89b3d709';
+const API = "http://localhost:5000/api";
 
 export const Task = ({task}) => {
 
@@ -20,12 +20,10 @@ export const Task = ({task}) => {
     }
 
     const checkCompletedTask = async (taskId) => {
-
-        // const options = {  headers: { 'Content-Type': 'application/json' }, method: 'POST', body: JSON.stringify({'task_id': taskId})};
-        // const data = await fetch(`${API}/game/${gameId}/move/${position}`, options);
-        // const dataJSON = await data.json();
-        // return dataJSON;
-        return true
+        const options = {  headers: { 'Content-Type': 'application/json' }, method: 'POST', body: JSON.stringify({'status': !status})};
+        const data = await fetch(`${API}/task/${taskId}`, options);
+        const dataJSON = await data.json();
+        return dataJSON;
     }
 
     const onComplete = async (e) => {
@@ -37,16 +35,16 @@ export const Task = ({task}) => {
     return (
         <div className="col-md-4" style={{'padding':'10px', 'cursor': 'pointer'}} onClick={handleClick}>
             <div className="card border-secondary">
-            <div className="card-header">Task #{task.id}</div>
+            <div className="card-header">Task #{task.task_id}</div>
                 <div className="card-body">
                     <h4>{task.name}</h4>
-                    <p>#{task.id}</p>
+                    <p>#{task.task_id}</p>
                     <Indicator status={status} />
                 </div>
             </div>
             {
                 (active) && 
-                    <Modal task={task} key={task.id} onClose={onClose} onComplete={onComplete} />
+                    <Modal task={task} key={task.task_id} onClose={onClose} onComplete={onComplete} />
             }
         </div>
     )

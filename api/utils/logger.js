@@ -1,7 +1,6 @@
-"use strict"
-var winston = require('winston');
+const winston = require('winston');
 
-let logger = winston.createLogger({
+const logger = winston.createLogger({
     level: 'info',
     format: winston.format.json(),
     transports: [

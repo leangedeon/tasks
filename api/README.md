@@ -2,15 +2,15 @@
 
 - Set node 12 before start
 
-- Execute ```npm install```to install dependencies and then run ```npm start``` to start proyect.
+- Execute ```npm install```to install dependencies and then run ```npm start``` to start project.
 
-- Route [http://localhost:3000/api/tasks](http://localhost:3000/api/tasks)
+- Route [http://localhost:5000/api/tasks](http://localhost:5000/api/tasks)
 
 ### Available methods
 
 - Get all tasks
 ```
-curl --location --request GET 'http://localhost:3000/api/tasks/5' \
+curl --location --request GET 'http://localhost:5000/api/tasks/5' \
 --header 'Content-Type: application/json' \
 --data-raw ''
 ```
