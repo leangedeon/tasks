@@ -5,7 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development --open --port=3000",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "docker-build": "docker build -t front .",
+    "docker-npm-install": "docker run --rm -v $(pwd):/usr/src/app -e APP_ENV=dev front npm install",
+    "docker-npm-build": "docker run --rm -v $(pwd):/usr/src/app -e APP_ENV=dev front npm run build",
+    "docker-npm-install-dev": "docker run --rm -e APP_ENV=dev front npm --ignore-engines",
+    "docker-npm-build-dev": "docker run --volumes-from configs -e APP_ENV=dev front npm run build",
+    "docker-npm-run": "docker run --rm -e APP_ENV=dev front",
+    "docker-clean": "docker rm $(docker ps -a -q) 2>/dev/null; docker rm -f front 2>/dev/null; echo all clean",
+    "docker-start": "docker run -d -p 3000:3000 -v $(pwd):/usr/src/app -e APP_ENV=dev --name=front front npm run start",
+    "docker-fresh-start": "npm run docker-build && npm run docker-clean; npm run docker-npm-install && npm run docker-start"
   },
   "repository": {
     "type": "git",

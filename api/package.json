@@ -4,8 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-dev": "nodemon index.js",
-    "start": "node index.js"
+    "start": "nodemon ./bin/www",
+    "start-prod": "node ./bin/www",
+    "docker-build": "docker build -t api .",
+    "docker-npm-install": "docker run --rm -v $(pwd):/usr/src/app -e APP_ENV=dev api npm install",
+    "docker-npm-build": "docker run --rm -v $(pwd):/usr/src/app -e APP_ENV=dev api npm run build",
+    "docker-npm-install-dev": "docker run --rm -e APP_ENV=dev api npm --ignore-engines",
+    "docker-npm-build-dev": "docker run --volumes-from configs -e APP_ENV=dev api npm run build",
+    "docker-npm-run": "docker run --rm -e APP_ENV=dev api",
+    "docker-clean": "docker rm $(docker ps -a -q) 2>/dev/null; docker rm -f api 2>/dev/null; echo all clean",
+    "docker-start": "docker run -d -p 5000:5000 -v $(pwd):/usr/src/app -e APP_ENV=dev --name=api api npm run start",
+    "docker-fresh-start": "npm run docker-build && npm run docker-clean; npm run docker-npm-install && npm run docker-start"
   },
   "keywords": [],
   "author": "",
