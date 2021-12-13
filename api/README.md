@@ -21,3 +21,25 @@ curl --location --request PUT 'http://localhost:5000/api/task/189f3b8b-ff9a-4bf1
 --header 'Content-Type: application/json' \
 --data-raw '{"status": "complete"}'
 ```
+
+
+## Using docker
+
+- Execute ```docker-fresh-start``` to run with docker.
+
+## Using docker-compose
+
+*This method doesnt have hot reload*
+- Go to root directory and run
+
+```bash
+docker-compose build
+```
+
+And then...
+
+```bash
+docker-compose up
+```
+
+- Exposes front and server on the same ports
