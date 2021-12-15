@@ -35,9 +35,9 @@ mongoose.connect(mongo_uri_connect,
 );
 
 mongoose.connection
-    .on('connected', () => console.log('mongo connected'))
+    .on('connected', () => logger.info('mongo connected'))
     .on('error', () => {
         throw new Error("unable to connect to database: ", mongo_uri_connect);
 });
 
-app.listen(5000, console.log('Server started http://localhost:5000/api'));
+app.listen(5000, logger.info('Server started http://localhost:5000/api'));

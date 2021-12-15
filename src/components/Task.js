@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from "./Modal"
 import { Indicator } from "./Indicator"
 import PropTypes from "prop-types";
-const API = "http://localhost:5000/api";
+import { API } from '../constants'
 
 export const Task = ({task}) => {
 
@@ -27,7 +27,7 @@ export const Task = ({task}) => {
     }
 
     const onComplete = async (e) => {
-        const updatedTask = await checkCompletedTask(e.target.value)        
+        await checkCompletedTask(e.target.value)
         setStatus(!status)
         onClose()
     }
